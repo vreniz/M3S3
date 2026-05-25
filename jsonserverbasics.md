@@ -384,6 +384,171 @@ get();
 > - `PUT` → reemplaza el objeto **completo**. Si mandas solo `{ precio: 900000 }`, el campo `nombre` desaparece.
 > - `PATCH` → actualiza **solo los campos que mandas**. El resto queda intacto.
 > - Para ediciones parciales, siempre prefiere `PATCH`.
+---
+### El problema del dato "quemado"
+ 
+Una función que siempre crea el mismo producto no sirve de nada en la práctica:
+ 
+```javascript
+// ❌ MAL — hardcodeado, inútil en el mundo real
+async function post() {
+  body: JSON.stringify({ nombre: "Pedal Boss DS-1", precio: 320000 }) // siempre lo mismo
+}
+```
+ 
+La solución: la función recibe el dato como **parámetro**. Tú decides qué le mandas cuando la llamas.
+ 
+```javascript
+// ✅ BIEN — el dato viene de afuera, la función es reutilizable
+async function post(nuevoProducto) {   // recibe lo que tú le mandes
+  body: JSON.stringify(nuevoProducto)  // usa eso
+}
+ 
+// Y la llamas con el dato que quieras:
+post({ nombre: "Amplificador Fender", precio: 2400000 });
+post({ nombre: "Platillos Zildjian",  precio: 890000  });
+```
+ 
+Lo mismo aplica para `put()` (necesita saber qué ID editar y con qué datos) y `del()` (necesita saber qué ID borrar).
+ 
+---
+ 
+### Las 4 funciones — bien parametrizadas y explicadas
+ 
+```javascript
+const BASE_URL = "http://localhost:3000";
+ 
+// ─────────────────────────────────────────────────────────────────
+// GET — obtener todos los productos
+//
+// No necesita parámetros porque siempre pide la misma lista.
+// ─────────────────────────────────────────────────────────────────
+async function get() {
+  try {
+    // fetch sin segundo argumento = GET por defecto
+    const res = await fetch(`${BASE_URL}/productos`);
+ 
+    // res.ok es true si el servidor respondió 200-299 (éxito)
+    // Si fue un 404, 500, etc., lo tratamos como error manualmente
+    if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+ 
+    // La respuesta llega como texto. .json() lo convierte en array de objetos JS.
+    // También es asíncrono, así que necesita await.
+    const data = await res.json();
+ 
+    console.log("Productos:", data);
+    // data es un array → [{ id: 1, nombre: "...", precio: ... }, ...]
+  } catch (error) {
+    console.error("Algo salió mal:", error);
+  }
+}
+ 
+// Uso:
+get();
+ 
+ 
+// ─────────────────────────────────────────────────────────────────
+// POST — crear un producto nuevo
+//
+// Recibe `nuevoProducto`: el objeto que quieres guardar.
+// Tú decides qué le mandas. json-server asigna el id automáticamente.
+// ─────────────────────────────────────────────────────────────────
+async function post(nuevoProducto) {
+  try {
+    const res = await fetch(`${BASE_URL}/productos`, {
+      method: "POST",
+ 
+      headers: {
+        "Content-Type": "application/json"
+        // Le dices al servidor: "lo que te mando en body está en formato JSON"
+        // Sin este header, el servidor no sabe interpretar el body
+      },
+ 
+      body: JSON.stringify(nuevoProducto)
+      // body es el "paquete" que envías al servidor
+      // JSON.stringify convierte tu objeto JS en texto JSON:
+      // { nombre: "Fender", precio: 500 }  →  '{"nombre":"Fender","precio":500}'
+    });
+ 
+    if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+ 
+    // El servidor responde con el objeto que creó, incluyendo el id nuevo
+    const data = await res.json();
+    console.log("Creado:", data);
+    // data → { id: 4, nombre: "Fender", precio: 500 }
+  } catch (error) {
+    console.error("Algo salió mal:", error);
+  }
+}
+ 
+// Usos — tú controlas qué se crea:
+post({ nombre: "Amplificador Fender",  precio: 2400000 });
+post({ nombre: "Platillos Zildjian",   precio: 890000  });
+post({ nombre: "Bajo Fender Jazz",     precio: 1800000 });
+ 
+ 
+// ─────────────────────────────────────────────────────────────────
+// PUT — reemplazar un producto COMPLETO por su id
+//
+// Recibe `id`: el número del producto a reemplazar.
+// Recibe `datosNuevos`: el objeto con el que se reemplaza.
+//
+// ⚠️ PUT reemplaza TODO. Si no mandas un campo, ese campo desaparece.
+//    Usa PATCH si solo quieres editar un campo suelto.
+// ─────────────────────────────────────────────────────────────────
+async function put(id, datosNuevos) {
+  try {
+    // El id va en la URL: /productos/2 edita el producto con id 2
+    const res = await fetch(`${BASE_URL}/productos/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datosNuevos)
+    });
+ 
+    if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+ 
+    const data = await res.json();
+    console.log("Reemplazado:", data);
+  } catch (error) {
+    console.error("Algo salió mal:", error);
+  }
+}
+ 
+// Usos — tú eliges el id y los datos nuevos:
+put(1, { nombre: "Guitarra Yamaha F310", precio: 950000 });
+put(2, { nombre: "Bajo Squier",          precio: 780000 });
+ 
+// ⚠️ Esto borraría el campo nombre porque no lo incluiste:
+// put(1, { precio: 500000 });  → resultado: { id: 1, precio: 500000 }  (sin nombre)
+ 
+ 
+// ─────────────────────────────────────────────────────────────────
+// DELETE — eliminar un producto por su id
+//
+// Recibe `id`: el número del producto a eliminar.
+// DELETE no envía body — solo necesita el id en la URL.
+// ─────────────────────────────────────────────────────────────────
+async function del(id) {
+  try {
+    const res = await fetch(`${BASE_URL}/productos/${id}`, {
+      method: "DELETE"
+      // No hay headers ni body — solo el método y el id en la URL
+    });
+ 
+    // DELETE exitoso devuelve código 200 pero el body viene vacío
+    // Por eso no hacemos res.json() — no hay nada que convertir
+    if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+ 
+    console.log(`Producto ${id} eliminado ✅`);
+  } catch (error) {
+    console.error("Algo salió mal:", error);
+  }
+}
+ 
+// Usos:
+del(1);
+del(3);
+```
 
 ---
 
