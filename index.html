@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Notas · DOM Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<main class="app" role="main">
+
+  <!-- ── HEADER ──────────────────────────────────────────── -->
+  <header>
+    <span class="tag">DOM Practice</span>
+    <h1>Notas<span>.</span></h1>
+    <p class="subtitle">
+      Agrega y elimina notas. Los datos se guardan en<br>
+      <code>localStorage</code> y persisten al recargar la página.
+    </p>
+  </header>
+
+  <!-- ── INPUT ZONE ──────────────────────────────────────── -->
+  <!-- getElementById target: inputNota, btnAgregar -->
+  <div class="input-zone">
+    <input
+      type="text"
+      id="inputNota"
+      placeholder="Escribe tu nota aquí…"
+      autocomplete="off"
+      aria-label="Nueva nota"
+    />
+    <button id="btnAgregar" aria-label="Agregar nota">Agregar</button>
+  </div>
+
+  <!-- mensaje de error de validación -->
+  <p class="error-msg" id="errorMsg" role="alert">
+    ⚠ El campo no puede estar vacío.
+  </p>
+
+  <!-- ── LISTA ────────────────────────────────────────────── -->
+  <div class="list-header">
+    <span class="list-label">Mis notas</span>
+    <span id="contadorNotas">0 notas</span>
+  </div>
+
+  <!-- querySelector target: #listaNotas -->
+  <ul id="listaNotas" aria-live="polite"></ul>
+
+  <!-- estado vacío -->
+  <div class="empty-state visible" id="emptyState" aria-hidden="true">
+    <span class="empty-icon">📋</span>
+    Aún no hay notas.<br>¡Agrega la primera arriba!
+  </div>
+
+  <!-- ── CONSOLA VISUAL ───────────────────────────────────── -->
+  <div class="console-log" aria-label="Registro de acciones">
+    <div class="console-bar">
+      <span class="console-dot"></span>
+      consola
+    </div>
+    <ul id="logOutput"></ul>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     SCRIPT PRINCIPAL  (TASK 2 – 5)
+============================================================ -->
+<script src="script2.js"></script>
+</body>
+</html>
