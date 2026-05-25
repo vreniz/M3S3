@@ -140,7 +140,7 @@ Abre `package.json` y reemplaza la línea del script `"test"` para que quede as�
   "name": "mi-proyecto-api",
   "version": "1.0.0",
   "scripts": {
-    "api": "json-server --watch db.json --port 3000"
+    "start": "json-server --watch db.json --port 3000"
   },
   "devDependencies": {
     "json-server": "^1.0.0"
@@ -157,7 +157,7 @@ Abre `package.json` y reemplaza la línea del script `"test"` para que quede as�
 En la terminal, estando dentro de `mi-proyecto-api/`, ejecuta:
 
 ```bash
-npm run api
+npm run start
 ```
 
 Verás algo así:
@@ -1069,7 +1069,7 @@ mi-proyecto-api/
 
 ---
 
-## Resumen en 5 pasos
+## Resumen en 5 pasos basicos para json-server: 
 
 ```bash
 mkdir mi-proyecto-api   # 1. Crea carpeta
@@ -1081,7 +1081,7 @@ npm install json-server --save-dev  # 4. Instala json-server
 Luego crea `db.json`, agrega el script en `package.json` y:
 
 ```bash
-npm run api             # 5. Levanta la API
+npm run start             # 5. Levanta la API
 ```
 
-¡Listo! En menos de 5 minutos tienes una API REST funcionando. 🚀
+¡Listo! En menos de 5 minutos tienes una API REST json-server funcionando. 🚀
