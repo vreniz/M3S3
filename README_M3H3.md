@@ -21,7 +21,7 @@ Practicar las APIs nativas del navegador para:
 M3H3/
 ├── index.html     ← estructura HTML de la app
 ├── styles.css     ← estilos y variables CSS
-└── script2.js     ← lógica JavaScript (Tasks 2 – 5)
+└── script.js     ← lógica JavaScript (Tasks 2 – 5)
 ```
 
 ---
@@ -129,48 +129,7 @@ if (dato) {
 Cada vez que se agrega o elimina una nota, el arreglo en memoria se sincroniza con `localStorage`. Al recargar, se recupera y se re-renderiza cada nota.
 
 ### TASK 6 — Validación y evidencias
-
-La app incluye una **consola visual** en pantalla (`#logOutput`) que registra en tiempo real:
-
-- Cuántas notas se cargaron desde `localStorage` al iniciar
-- Qué nota se agregó o eliminó
-- Cuándo se actualizó `localStorage`
-
-Esto permite verificar el comportamiento sin abrir DevTools.
-
-**Para verificar en el navegador:**
-
-1. Abrir DevTools → pestaña **Application** → **Local Storage** → `file://`
-2. Agregar notas y observar cómo la clave `notas` se actualiza con cada acción
-3. Recargar la página y comprobar que las notas persisten
-
+(agregar)
 ---
 
-## Criterios de aceptación cumplidos
 
-| Criterio | Estado |
-|---|---|
-| `appendChild` y `removeChild` para agregar y eliminar del DOM | ✅ |
-| Al menos dos métodos de selección (`getElementById`, `querySelector`) | ✅ |
-| Contenido modificado con `textContent` | ✅ |
-| Notas persisten tras recargar | ✅ |
-| Acciones evidenciadas en consola (DevTools y panel visual) | ✅ |
-| Código comentado con `let` / `const` | ✅ |
-
----
-
-## Conceptos clave usados
-
-| Concepto | Dónde se usa |
-|---|---|
-| `document.getElementById` | Selección de input y botón Agregar |
-| `document.querySelector` | Selección de lista, error, contador y log |
-| `document.createElement` | Crear `<li>`, `<span>`, `<button>` |
-| `appendChild` | Insertar nota en `<ul>` |
-| `removeChild` | Eliminar nota de `<ul>` |
-| `textContent` | Asignar texto a span y botón |
-| `classList.add / remove` | Mostrar y ocultar error y estado vacío |
-| `localStorage.setItem` | Guardar notas serializadas como JSON |
-| `localStorage.getItem` | Recuperar notas al cargar la página |
-| `JSON.stringify / parse` | Serializar y deserializar el array de notas |
-| `addEventListener` | Click en Agregar y Eliminar, Enter en input |
