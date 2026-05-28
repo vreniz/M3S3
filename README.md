@@ -28,6 +28,14 @@ M3H3/
 
 ## Cómo correr el proyecto
 
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/vreniz/M3S3.git
+cd M3S3
+```
+### 2. Abrir en el navegador
+
 No requiere instalación ni servidor. Basta con abrir `index.html` directamente en el navegador:
 
 ```
@@ -55,6 +63,51 @@ xdg-open index.html    # Linux
 | Recargar la página | Las notas persisten — se recuperan desde `localStorage` |
 | Intentar agregar una nota vacía | Muestra un mensaje de error sin agregar nada |
 
+---
+### TASK — Validación y evidencias
+ 
+### Elements — DOM antes y después
+ 
+**1. Estado vacío** — `#listaNotas` está vacío, sin elementos `<li>` presentes.
+ 
+![DOM vacío](assets/elements/1.Empty.png)
+ 
+**2. Luego de agregar una nota** — aparece un nuevo `<li class="nota-item">` dentro de `#listaNotas` sin recargar la página.
+ 
+![DOM luego de agregar](assets/elements/2.luegodeagregar.png)
+ 
+**3. Luego de eliminar la nota** — el `<li>` se elimina del DOM y la lista vuelve al estado vacío.
+ 
+![DOM luego de eliminar](assets/elements/3.luegodeeliminar.png)
+ 
+---
+ 
+### Console — logs por cada operación
+ 
+**Luego de agregar una nota** — la consola muestra `[TASK 3] Nota agregada` y `[TASK 5] localStorage actualizado`.
+ 
+![Consola luego de agregar](assets/console/1.DOM—despuésdenota.png)
+ 
+**Luego de agregar y eliminar** — secuencia completa de logs: notas agregadas, nota eliminada, localStorage actualizado tras cada acción.
+ 
+![Consola agregar y eliminar](assets/console/2.DOM-agregaryeliminarconstorage.png)
+ 
+**Luego de recargar** — la consola muestra `[TASK 5] Notas cargadas desde localStorage`, confirmando que los datos persistieron.
+ 
+![Consola notas cargadas](assets/console/3.DOM-notascargadasdelstorage.png)
+ 
+---
+ 
+### Application — panel de Local Storage
+ 
+**Con datos, antes de recargar** — la clave `notas` almacena el array actual como string JSON.
+ 
+![LocalStorage sin recargar](assets/application/1.localstoragesnrecargar.png)
+ 
+**Después de recargar** — los datos persisten en Local Storage; las notas siguen presentes y se cargan de vuelta en la interfaz.
+ 
+![LocalStorage después de recargar](assets/application/2.localstoragedesprecargar.png)
+ 
 ---
 
 ## Tareas implementadas
@@ -126,51 +179,5 @@ if (dato) {
 ```
 
 Cada vez que se agrega o elimina una nota, el arreglo en memoria se sincroniza con `localStorage`. Al recargar, se recupera y se re-renderiza cada nota.
-
-### TASK 6 — Validación y evidencias
- 
-### Elements — DOM antes y después
- 
-**1. Estado vacío** — `#listaNotas` está vacío, sin elementos `<li>` presentes.
- 
-![DOM vacío](assets/elements/1.Empty.png)
- 
-**2. Luego de agregar una nota** — aparece un nuevo `<li class="nota-item">` dentro de `#listaNotas` sin recargar la página.
- 
-![DOM luego de agregar](assets/elements/2.luegodeagregar.png)
- 
-**3. Luego de eliminar la nota** — el `<li>` se elimina del DOM y la lista vuelve al estado vacío.
- 
-![DOM luego de eliminar](assets/elements/3.luegodeeliminar.png)
- 
----
- 
-### Console — logs por cada operación
- 
-**Luego de agregar una nota** — la consola muestra `[TASK 3] Nota agregada` y `[TASK 5] localStorage actualizado`.
- 
-![Consola luego de agregar](assets/console/1.DOM—despuésdenota.png)
- 
-**Luego de agregar y eliminar** — secuencia completa de logs: notas agregadas, nota eliminada, localStorage actualizado tras cada acción.
- 
-![Consola agregar y eliminar](assets/console/2.DOM-agregaryeliminarconstorage.png)
- 
-**Luego de recargar** — la consola muestra `[TASK 5] Notas cargadas desde localStorage`, confirmando que los datos persistieron.
- 
-![Consola notas cargadas](assets/console/3.DOM-notascargadasdelstorage.png)
- 
----
- 
-### Application — panel de Local Storage
- 
-**Con datos, antes de recargar** — la clave `notas` almacena el array actual como string JSON.
- 
-![LocalStorage sin recargar](assets/application/1.localstoragesnrecargar.png)
- 
-**Después de recargar** — los datos persisten en Local Storage; las notas siguen presentes y se cargan de vuelta en la interfaz.
- 
-![LocalStorage después de recargar](assets/application/2.localstoragedesprecargar.png)
- 
----
 
 
