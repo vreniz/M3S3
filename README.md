@@ -42,7 +42,6 @@ start index.html       # Windows
 xdg-open index.html    # Linux
 ```
 
-> ⚠️ Si se usa Live Server en VS Code, cada vez que `localStorage` cambia el servidor puede detectar actividad. Se recomienda abrir el archivo directamente para evitar recargas inesperadas.
 
 ---
 
