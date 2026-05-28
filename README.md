@@ -150,7 +150,7 @@ Cada vez que se agrega o elimina una nota, el arreglo en memoria se sincroniza c
  
 **Luego de agregar una nota** — la consola muestra `[TASK 3] Nota agregada` y `[TASK 5] localStorage actualizado`.
  
-![Consola luego de agregar](assets/console/1.DOM—despuésdenota.png)
+![Consola luego de agregar](assets/console/1.DOM—despuésdenota.png)
  
 **Luego de agregar y eliminar** — secuencia completa de logs: notas agregadas, nota eliminada, localStorage actualizado tras cada acción.
  
