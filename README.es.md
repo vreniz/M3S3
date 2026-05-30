@@ -180,4 +180,7 @@ if (dato) {
 ```
 
 Cada vez que se agrega o elimina una nota, el arreglo en memoria se sincroniza con `localStorage`. Al recargar, se recupera y se re-renderiza cada nota.
+## 👩🏻‍💻 Autor
 
+**Vanessa Fontalvo Reniz** <br>
+**Systems & Computing Engineer** | Frontend Developer
