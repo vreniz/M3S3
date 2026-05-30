@@ -1,6 +1,7 @@
 # Lista de Notas · DOM Practice
 
 Mini-app de notas construida con HTML, CSS y JavaScript vanilla como ejercicio de manipulación del DOM y persistencia con `localStorage`.
+- [Ver Readme en Inglés](README.md)
 
 ---
 
