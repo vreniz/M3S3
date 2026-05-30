@@ -182,3 +182,7 @@ if (data) {
 ```
 
 Every time a note is added or deleted, the in-memory array is synced with `localStorage`. On reload, the data is recovered and each note is re-rendered.
+## 👩🏻‍💻 Author
+
+**Vanessa Fontalvo Reniz** <br>
+**Systems & Computing Engineer** | Frontend Developer
