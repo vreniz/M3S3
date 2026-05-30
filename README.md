@@ -1,48 +1,51 @@
-# Lista de Notas · DOM Practice
 
-Mini-app de notas construida con HTML, CSS y JavaScript vanilla como ejercicio de manipulación del DOM y persistencia con `localStorage`.
+# Notes List · DOM Practice
 
----
-
-## Objetivo
-
-Practicar las APIs nativas del navegador para:
-
-- Seleccionar elementos del DOM con `getElementById` y `querySelector`
-- Crear, insertar y eliminar nodos dinámicamente con `createElement`, `appendChild` y `removeChild`
-- Modificar contenido con `textContent`
-- Persistir datos entre recargas usando `localStorage`
+A mini notes app built with HTML, CSS and vanilla JavaScript as a DOM manipulation and `localStorage` persistence exercise.
+- [See README in Spanish](README.es.md)
 
 ---
 
-## Estructura del proyecto
+## Goal
+
+Practice native browser APIs to:
+
+- Select DOM elements with `getElementById` and `querySelector`
+- Dynamically create, insert and remove nodes with `createElement`, `appendChild` and `removeChild`
+- Modify content with `textContent`
+- Persist data between page reloads using `localStorage`
+
+---
+
+## Project structure
 
 ```
 M3H3/
-├── index.html     ← estructura HTML de la app
-├── styles.css     ← estilos y variables CSS
-└── script.js     ← lógica JavaScript (Tasks 2 – 5)
+├── index.html     ← HTML structure of the app
+├── styles.css     ← styles and CSS variables
+└── script.js      ← JavaScript logic (Tasks 2 – 5)
 ```
 
 ---
 
-## Cómo correr el proyecto
+## How to run the project
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/vreniz/M3S3.git
 cd M3S3
 ```
-### 2. Abrir en el navegador
 
-No requiere instalación ni servidor. Basta con abrir `index.html` directamente en el navegador:
+### 2. Open in the browser
+
+No installation or server required. Just open `index.html` directly in the browser:
 
 ```
-Doble click en index.html
+Double click on index.html
 ```
 
-O desde la terminal:
+Or from the terminal:
 
 ```bash
 open index.html        # macOS
@@ -50,78 +53,78 @@ start index.html       # Windows
 xdg-open index.html    # Linux
 ```
 
-
 ---
 
-## Funcionalidades
+## Features
 
-| Acción | Comportamiento |
+| Action | Behavior |
 |---|---|
-| Escribir en el input y hacer click en **Agregar** | Crea un `<li>` con la nota y lo inserta en la lista |
-| Presionar **Enter** en el input | Equivale a hacer click en Agregar |
-| Hacer click en **Eliminar** de una nota | Remueve el `<li>` del DOM y actualiza `localStorage` |
-| Recargar la página | Las notas persisten — se recuperan desde `localStorage` |
-| Intentar agregar una nota vacía | Muestra un mensaje de error sin agregar nada |
+| Type in the input and click **Add** | Creates a `<li>` with the note and inserts it into the list |
+| Press **Enter** in the input | Equivalent to clicking Add |
+| Click **Delete** on a note | Removes the `<li>` from the DOM and updates `localStorage` |
+| Reload the page | Notes persist — they are recovered from `localStorage` |
+| Try to add an empty note | Shows an error message without adding anything |
 
 ---
-### TASK — Validación y evidencias
- 
-### Elements — DOM antes y después
- 
-**1. Estado vacío** — `#listaNotas` está vacío, sin elementos `<li>` presentes.
- 
-![DOM vacío](assets/elements/1.Empty.png)
- 
-**2. Luego de agregar una nota** — aparece un nuevo `<li class="nota-item">` dentro de `#listaNotas` sin recargar la página.
- 
-![DOM luego de agregar](assets/elements/2.luegodeagregar.png)
- 
-**3. Luego de eliminar la nota** — el `<li>` se elimina del DOM y la lista vuelve al estado vacío.
- 
-![DOM luego de eliminar](assets/elements/3.luegodeeliminar.png)
- 
----
- 
-### Console — logs por cada operación
- 
-**Luego de agregar una nota** — la consola muestra `[TASK 3] Nota agregada` y `[TASK 5] localStorage actualizado`.
- 
-![Consola luego de agregar](assets/console/1.DOM—despuésdenota.png)
- 
-**Luego de agregar y eliminar** — secuencia completa de logs: notas agregadas, nota eliminada, localStorage actualizado tras cada acción.
- 
-![Consola agregar y eliminar](assets/console/2.DOM-agregaryeliminarconstorage.png)
- 
-**Luego de recargar** — la consola muestra `[TASK 5] Notas cargadas desde localStorage`, confirmando que los datos persistieron.
- 
-![Consola notas cargadas](assets/console/3.DOM-notascargadasdelstorage.png)
- 
----
- 
-### Application — panel de Local Storage
- 
-**Con datos, antes de recargar** — la clave `notas` almacena el array actual como string JSON.
- 
-![LocalStorage sin recargar](assets/application/1.localstoragesnrecargar.png)
- 
-**Después de recargar** — los datos persisten en Local Storage; las notas siguen presentes y se cargan de vuelta en la interfaz.
- 
-![LocalStorage después de recargar](assets/application/2.localstoragedesprecargar.png)
- 
+
+### TASK — Validation and evidence
+
+### Elements — DOM before and after
+
+**1. Empty state** — `#listaNotas` is empty, no `<li>` elements present.
+
+![Empty DOM](assets/elements/1.Empty.png)
+
+**2. After adding a note** — a new `<li class="nota-item">` appears inside `#listaNotas` without reloading the page.
+
+![DOM after adding](assets/elements/2.luegodeagregar.png)
+
+**3. After deleting the note** — the `<li>` is removed from the DOM and the list returns to its empty state.
+
+![DOM after deleting](assets/elements/3.luegodeeliminar.png)
+
 ---
 
-## Tareas implementadas
+### Console — logs per operation
 
-### TASK 1 — Estructura HTML
+**After adding a note** — the console shows `[TASK 3] Nota agregada` and `[TASK 5] localStorage actualizado`.
 
-`index.html` contiene:
+![Console after adding](assets/console/1.DOM—despuésdenota.png)
 
-- Título e instrucción
-- `<input id="inputNota">` y `<button id="btnAgregar">`
-- `<ul id="listaNotas">` donde se renderizan las notas
-- Estado vacío, contador y consola visual
+**After adding and deleting** — full log sequence: notes added, note deleted, localStorage updated after each action.
 
-### TASK 2 — Selección de elementos
+![Console add and delete](assets/console/2.DOM-agregaryeliminarconstorage.png)
+
+**After reloading** — the console shows `[TASK 5] Notas cargadas desde localStorage`, confirming that data persisted.
+
+![Console notes loaded](assets/console/3.DOM-notascargadasdelstorage.png)
+
+---
+
+### Application — LocalStorage panel
+
+**With data, before reloading** — the `notas` key stores the current array as a JSON string.
+
+![LocalStorage before reload](assets/application/1.localstoragesnrecargar.png)
+
+**After reloading** — data persists in LocalStorage; notes are still present and loaded back into the interface.
+
+![LocalStorage after reload](assets/application/2.localstoragedesprecargar.png)
+
+---
+
+## Implemented tasks
+
+### TASK 1 — HTML structure
+
+`index.html` contains:
+
+- Title and instruction
+- `<input id="inputNota">` and `<button id="btnAgregar">`
+- `<ul id="listaNotas">` where notes are rendered
+- Empty state, counter and visual console
+
+### TASK 2 — Element selection
 
 ```javascript
 // getElementById
@@ -133,51 +136,49 @@ const listaNotas = document.querySelector('#listaNotas');
 const errorMsg   = document.querySelector('#errorMsg');
 ```
 
-Se loggean en consola al cargar la página para confirmar que las referencias existen.
+Logged to the console on page load to confirm the references exist.
 
-### TASK 3 — Agregar notas al DOM
+### TASK 3 — Adding notes to the DOM
 
 ```javascript
-const renderizarNota = (texto) => {
-  const li          = document.createElement('li');
-  const spanTexto   = document.createElement('span');
-  const btnEliminar = document.createElement('button');
+const renderNote = (text) => {
+  const li           = document.createElement('li');
+  const spanText     = document.createElement('span');
+  const btnDelete    = document.createElement('button');
 
-  spanTexto.textContent   = texto;       // textContent para el texto
-  btnEliminar.textContent = 'Eliminar';  // textContent para el botón
+  spanText.textContent  = text;      // textContent for the text
+  btnDelete.textContent = 'Delete';  // textContent for the button
 
-  li.appendChild(spanTexto);
-  li.appendChild(btnEliminar);
-  listaNotas.appendChild(li);            // appendChild en la <ul>
+  li.appendChild(spanText);
+  li.appendChild(btnDelete);
+  listaNotas.appendChild(li);        // appendChild into the <ul>
 };
 ```
 
-Antes de renderizar, se valida que el input no esté vacío. Si lo está, se muestra `#errorMsg` y se enfoca el input de nuevo.
+Before rendering, the input is validated to ensure it is not empty. If it is, `#errorMsg` is shown and the input is focused again.
 
-### TASK 4 — Eliminar notas del DOM
+### TASK 4 — Removing notes from the DOM
 
 ```javascript
-btnEliminar.addEventListener('click', () => {
-  listaNotas.removeChild(li);              // removeChild desde la <ul>
-  notas = notas.filter(n => n !== texto);  // actualizar arreglo en memoria
-  guardarEnStorage();
+btnDelete.addEventListener('click', () => {
+  listaNotas.removeChild(li);             // removeChild from the <ul>
+  notes = notes.filter(n => n !== text);  // update the in-memory array
+  saveToStorage();
 });
 ```
 
-### TASK 5 — Persistencia con `localStorage`
+### TASK 5 — Persistence with `localStorage`
 
 ```javascript
-// Guardar
-localStorage.setItem('notas', JSON.stringify(notas));
+// Save
+localStorage.setItem('notas', JSON.stringify(notes));
 
-// Recuperar al cargar la página
-const dato = localStorage.getItem('notas');
-if (dato) {
-  notas = JSON.parse(dato);               // JSON string → array
-  notas.forEach(texto => renderizarNota(texto));
+// Recover on page load
+const data = localStorage.getItem('notas');
+if (data) {
+  notes = JSON.parse(data);              // JSON string → array
+  notes.forEach(text => renderNote(text));
 }
 ```
 
-Cada vez que se agrega o elimina una nota, el arreglo en memoria se sincroniza con `localStorage`. Al recargar, se recupera y se re-renderiza cada nota.
-
-
+Every time a note is added or deleted, the in-memory array is synced with `localStorage`. On reload, the data is recovered and each note is re-rendered.
